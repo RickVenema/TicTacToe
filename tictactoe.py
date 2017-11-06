@@ -24,7 +24,7 @@
 """
 
 __status__ = 'Stable'
-__version__ = '1.1'
+__version__ = '1.0.1'
 __author__ = 'Bas Kasemir'
 
 def drawboard(tiles,player):
@@ -40,16 +40,20 @@ def drawboard(tiles,player):
     """
     rowdivider = "-------------"
     possible = []
-    print(rowdivider)
+    print("\n{}".format(rowdivider))
     for key in tiles:
-        if key is "t3" or key is "t6" or key is "t9":
+        if key is "t3" or key is "t6":
             print("| {} |\n{}".format(tiles[key],rowdivider))
+        elif key is "t9":
+            print("| {} |\n{}\n".format(tiles[key],rowdivider))
         else:
             print("| {} ".format(tiles[key]), end="")
         if tiles[key] is " ":
             possible.append(key)
-    
-    askinput(player, possible, tiles)
+    if not possible:
+        print("\nIt's a tie! \n")
+    else:
+        askinput(player, possible, tiles)
 
 def askinput(player, possible, tiles):
     """
@@ -72,12 +76,12 @@ def askinput(player, possible, tiles):
             raise KeyError
         else:
             tiles[tileinput] = player
-            checkwin(tiles, player)
+            checkwin(tiles, player, possible)
     except KeyError:
         print("\n/!\ WARNING: You did not choose a empty slot, try again.")
         askinput(player, possible, tiles)
 
-def checkwin(tiles, player):
+def checkwin(tiles, player, possible):
     """
         Function that checks if the tiles in a winning row are all filled and if so, if they are the same. If it's all true the program will print which player wins this round. Otherwise it will call the drawboard() function to draw the board again.
         
