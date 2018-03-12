@@ -80,6 +80,9 @@ def askinput(player, possible, tiles):
     except KeyError:
         print("\n/!\ WARNING: You did not choose a empty slot, try again.")
         askinput(player, possible, tiles)
+    except: KeyboardInterrupt:
+        print("You've tried to kill this program, this is not allowed. Rage Quiting will be punished")
+        askinput(player, possible, tiles)
 
 def checkwin(tiles, player, possible):
     """
