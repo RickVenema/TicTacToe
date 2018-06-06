@@ -80,6 +80,9 @@ def askinput(player, possible, tiles):
     except KeyError:
         print("\n/!\ WARNING: You did not choose a empty slot, try again.")
         askinput(player, possible, tiles)
+    except KeyboardInterrupt:
+        print("\nGoodbye! :)")
+        exit()
 
 def checkwin(tiles, player, possible):
     """
